@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 5.0.2
- * Release date: 12/09/2018 (built at 11/09/2018 09:55:19)
+ * Release date: 12/09/2018 (built at 06/04/2022 20:43:06)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29546,7 +29546,7 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '11/09/2018 09:55:19';
+Handsontable.buildDate = '06/04/2022 20:43:06';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '5.0.2';
 
@@ -35017,8 +35017,12 @@ function EditorManager(instance, priv, selection) {
 
   function init() {
     instance.addHook('afterDocumentKeyDown', onKeyDown);
-
-    eventManager.addEventListener(document.documentElement, 'keydown', function (event) {
+    /*
+     * datawrapper fix:
+     * use `instance.rootElement.getRootNode()` instead of `document.documentElement`
+     * to make keydown event work in web component context
+     */
+    eventManager.addEventListener(instance.rootElement.getRootNode(), 'keydown', function (event) {
       if (!destroyed) {
         instance.runHooks('afterDocumentKeyDown', event);
       }
