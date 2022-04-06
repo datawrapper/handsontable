@@ -242,8 +242,12 @@ function EditorManager(instance, priv, selection) {
 
   function init() {
     instance.addHook('afterDocumentKeyDown', onKeyDown);
-
-    eventManager.addEventListener(document.documentElement, 'keydown', (event) => {
+    /*
+     * datawrapper fix:
+     * use `instance.rootElement.getRootNode()` instead of `document.documentElement`
+     * to make keydown event work in web component context
+     */
+    eventManager.addEventListener(instance.rootElement.getRootNode(), 'keydown', (event) => {
       if (!destroyed) {
         instance.runHooks('afterDocumentKeyDown', event);
       }
