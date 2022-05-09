@@ -124,7 +124,12 @@ function TableView(instance) {
     }
   });
 
-  this.eventManager.addEventListener(document.documentElement, 'mousedown', (event) => {
+  /*
+    * datawrapper fix:
+    * use `instance.rootElement.getRootNode()` instead of `document.documentElement`
+    * to prevent cell in edit mode from getting deselected when clicking within editable area
+    */
+  this.eventManager.addEventListener(instance.rootElement.getRootNode(), 'mousedown', (event) => {
     const originalTarget = event.target;
     const eventX = event.x || event.clientX;
     const eventY = event.y || event.clientY;
