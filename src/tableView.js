@@ -148,7 +148,7 @@ function TableView(instance) {
         return;
       }
     } else {
-      while (next !== document.documentElement) {
+      while (next !== instance.rootElement.getRootNode()) {
         if (next === null) {
           if (event.isTargetWebComponent) {
             break;

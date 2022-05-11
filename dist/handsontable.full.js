@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 5.0.2
- * Release date: 12/09/2018 (built at 10/05/2022 09:47:08)
+ * Release date: 12/09/2018 (built at 11/05/2022 23:52:18)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -34810,7 +34810,7 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '10/05/2022 09:47:08';
+Handsontable.buildDate = '11/05/2022 23:52:18';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '5.0.2';
 
@@ -42135,7 +42135,7 @@ function TableView(instance) {
         return;
       }
     } else {
-      while (next !== document.documentElement) {
+      while (next !== instance.rootElement.getRootNode()) {
         if (next === null) {
           if (event.isTargetWebComponent) {
             break;
