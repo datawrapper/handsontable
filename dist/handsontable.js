@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 5.0.2
- * Release date: 12/09/2018 (built at 06/04/2022 20:43:06)
+ * Release date: 12/09/2018 (built at 10/05/2022 09:47:08)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29546,7 +29546,7 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '06/04/2022 20:43:06';
+Handsontable.buildDate = '10/05/2022 09:47:08';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '5.0.2';
 
@@ -35373,7 +35373,12 @@ function TableView(instance) {
     }
   });
 
-  this.eventManager.addEventListener(document.documentElement, 'mousedown', function (event) {
+  /*
+    * datawrapper fix:
+    * use `instance.rootElement.getRootNode()` instead of `document.documentElement`
+    * to prevent cell in edit mode from getting deselected when clicking within editable area
+    */
+  this.eventManager.addEventListener(instance.rootElement.getRootNode(), 'mousedown', function (event) {
     var originalTarget = event.target;
     var eventX = event.x || event.clientX;
     var eventY = event.y || event.clientY;
